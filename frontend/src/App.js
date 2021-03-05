@@ -3,7 +3,6 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import LoginPage from "./pages/login/LoginPage";
 import ChatRoom from "./pages/chatroom/ChatRoom";
 
-
 const App = () => {
   return <BrowserRouter>
     <Switch>

@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import useStyle from './style'
 import classNames from 'classnames';
-
+import axios from 'axios'
 
 const LoginPage = (props) => {
 
@@ -30,12 +30,20 @@ const LoginPage = (props) => {
     const error = validation({name, gender});
     if (error)
       return alert(error);
-    props.history.push({
-      pathname: "chatroom",
-      state: {
-        name,
-        gender,
-      }
+    axios.post("http://localhost:3010/login", {
+      username: name,
+      gender,
+    }).then(res => {
+      props.history.push({
+        pathname: "chatroom",
+        state: {
+          name,
+          gender,
+        }
+      });
+    }).catch(err => {
+      console.log(err);
+      alert("یه مشکلی هست")
     });
   }
 
