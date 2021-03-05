@@ -1,0 +1,18 @@
+.login-page-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.login-box {
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 10px 0 rgba(20,83,155,0.05);
+}
+
+.name-input {
+    margin-bottom: 20px;
+}
