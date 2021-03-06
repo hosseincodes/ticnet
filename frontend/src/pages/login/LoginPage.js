@@ -38,28 +38,28 @@ const LoginPage = (props) => {
 
         <div className="login-box">
 
-        <div className="header">
+          <div className="header">
 
-          <h1>Ticnet</h1>
+            <h1>Ticnet</h1>
 
-        </div>
+          </div>
 
-        <div className="name-input">
+          <div className="name-input">
 
-          <input
-            id="outlined-basic"
-            placeholder="Enter your name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
+            <input
+              id="outlined-basic"
+              placeholder="Enter your name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
 
-        </div>
+          </div>
 
-        <div className="login-button">
+          <div className="login-button">
 
-          <button variant="contained" color="primary" onClick={submit}>Login to the chat room</button>
+            <button variant="contained" color="primary" onClick={submit}>Login to the chat room</button>
 
-        </div>
+          </div>
 
         </div>
 
