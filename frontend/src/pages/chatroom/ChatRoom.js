@@ -17,6 +17,7 @@ import {
 } from '@material-ui/icons';
 import axios from 'axios';
 import { ReactMic } from 'react-mic';
+import './style.css';
 
 const MessageBody = ({ message, classes }) => {
   if (message.type === 'voice')
@@ -186,7 +187,6 @@ const ChatRoom = (props) => {
             path: filePath,
             sender: {
               name: props.location.state.name,
-              gender: props.location.state.gender,
             },
             receiver: {
               name: userRef.current,
@@ -214,7 +214,6 @@ const ChatRoom = (props) => {
         msg: newMessage,
         sender: {
           name: props.location.state.name,
-          gender: props.location.state.gender,
         },
         receiver: {
           name: user,
@@ -245,7 +244,6 @@ const ChatRoom = (props) => {
           filePath: res.data.filePath,
           sender: {
             name: props.location.state.name,
-            gender: props.location.state.gender,
           },
           receiver: {
             name: userRef.current,
@@ -255,7 +253,6 @@ const ChatRoom = (props) => {
           path: res.data.filePath,
           sender: {
             name: props.location.state.name,
-            gender: props.location.state.gender,
           },
           receiver: {
             name: userRef.current,
@@ -307,60 +304,38 @@ const ChatRoom = (props) => {
               </div>
             ))}
           </Grid>
-          <Grid
-            item
-            className={classes.header}
-            container
-            alignItems={'center'}
-            justify={'center'}
-          >
-            <Typography className={classes.headerText}>
-              {`چت با ${user} ${isTypingReceiver ? '(درحال نوشتن)' : ''}`}
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            className={classes.middle}
-            direction={'column'}
-            ref={scrollableGrid}
-          >
+          <div className="header-chatroom">
+            <p className="header-chatroom-text">
+              {`Chat With ${user} ${isTypingReceiver ? '(is typing...)' : ''}`}
+            </p>
+          </div>
+          <div className="middle" ref={scrollableGrid}>
             {messages.map((message) => {
               return (
-                <Grid
-                  item
-                  container
-                  className={classNames(
-                    classes.messageParent,
-                    message.sender.name !== props.location.state.name &&
-                      classes.message_reverse,
-                  )}
-                  alignItems={'center'}
-                >
-                  <Grid item>
-                    <img
-                      title={message.sender.name}
-                      src={
-                        message.sender.gender == 0
-                          ? '/images/male_user.png'
-                          : '/images/famale_user.png'
-                      }
-                      alt={message.sender.name}
-                      className={classes.avatar}
-                    />
-                  </Grid>
-                  <Grid item>
+
+                <div className={classNames(
+                  "message",
+                  message.sender.name == props.location.state.name &&
+                    "message-reverse",
+                )}>
+                  
+                  <div className="message-box">
+
                     <div
                       className={classNames(
-                        classes.message,
+                        "message-box-content",
                         message.sender.name !== props.location.state.name
-                          ? classes.messageHe
-                          : classes.messageMe,
+                          ? "message-it"
+                          : "message-me",
                       )}
                     >
-                      <Typography className={classes.sender}>
+
+                      <h4 className="message-sender-name">
                         {message.sender.name}
-                      </Typography>
+                      </h4>
+
                       <MessageBody message={message} classes={classes} />
+
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         {message.sender.name === props.location.state.name &&
                           (message.seen ? (
@@ -368,10 +343,19 @@ const ChatRoom = (props) => {
                           ) : (
                             <SentIcon style={{ marginLeft: '0.5rem' }} />
                           ))}
-                        <Typography className={classes.date}>
+
+                        <p className="message-date">
                           {message.date.split('T')[1].split('.')[0]}
-                        </Typography>
-                        {message.sender.name === props.location.state.name && (
+                        </p>
+
+                        
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  {message.sender.name === props.location.state.name && (
                           <>
                             <IconButton
                               style={{ marginRight: '1rem' }}
@@ -381,21 +365,23 @@ const ChatRoom = (props) => {
                             >
                               <EditIcon className={classes.deleteBtn} />
                             </IconButton>
+
                             <IconButton
                               style={{ marginRight: '1rem' }}
                               onClick={() => onDeleteClick(message.id)}
                             >
+
                               <DeleteIcon className={classes.deleteBtn} />
+
                             </IconButton>
                           </>
                         )}
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
+
+                </div>
+
               );
             })}
-          </Grid>
+          </div>
           <Grid
             item
             className={classes.footer}

@@ -14,12 +14,10 @@ app.get('/', (req, res) => {
 });
 app.post('/login', async (req, res) => {
   const username = req.body.username;
-  const gender = parseInt(req.body.gender);
   const user = await User.findOne({ username });
   if (user) return res.status(200).send({});
   const newUser = new User({
     username,
-    gender,
   });
   await newUser.save();
   res.status(200).send({});

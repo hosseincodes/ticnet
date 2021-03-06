@@ -10,11 +10,27 @@
     background: #fff;
     padding: 20px 20px 40px 20px;
     border-radius: 20px;
-    box-shadow: 0 5px 10px 0 rgba(20,83,155,0.05);
+    box-shadow: 0 2px 5px 1px rgba(20,83,155,0.05);
 }
 
 .name-input {
     margin-bottom: 20px;
+}
+
+.name-input input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.login-button button {
+    padding: 8px;
+    border-radius: 5px;
+    border: 0;
+}
+
+.login-button button:hover {
+    box-shadow: 0 2px 5px 1px rgba(20,83,155,0.05);
 }
 
 @media only screen and (max-width: 731px) {

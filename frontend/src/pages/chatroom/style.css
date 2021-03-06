@@ -1,0 +1,63 @@
+.message {
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.message-box {
+    width: min-content;
+    margin: 0 25px;
+}
+
+.message-box-content {
+    border: 1px solid #ebebeb;
+    border-radius: 2rem;
+    background-color: white;
+    padding: 1rem 1.5rem;
+}
+
+.message-me {
+    display: flex;
+    position: relative;
+    background: #ebebeb;
+    align-items: flex-start;
+    border-radius: 20px;
+    border-bottom-right-radius: 0;
+    flex-direction: column;    
+}
+
+.message-it {
+    display: flex;
+    position: relative;
+    background: #ebebeb;
+    align-items: flex-end;
+    border-radius: 20px;
+    border-bottom-left-radius: 0;
+    flex-direction: column;
+}
+
+.message-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.message-sender-name {
+    margin: 0;
+}
+
+.message-date {
+    color: #aaa;
+}
+
+.header-chatroom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+    padding: 10px;
+}
+
+.middle {
+    height: 20rem;
+    background: white;
+    overflow-y: auto;
+}
