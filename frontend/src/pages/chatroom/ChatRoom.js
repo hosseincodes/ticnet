@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SocketIOClient from 'socket.io-client';
-import Paper from '@material-ui/core/Paper';
-import useStyle from './style';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
 import classNames from 'classnames';
@@ -19,7 +15,7 @@ import axios from 'axios';
 import { ReactMic } from 'react-mic';
 import './style.css';
 
-const MessageBody = ({ message, classes }) => {
+const MessageBody = ({ message }) => {
   if (message.type === 'voice')
     return (
       <audio controls>
@@ -29,11 +25,11 @@ const MessageBody = ({ message, classes }) => {
   if (message.type === 'file')
     return (
       <div>
-        <a target={'_blank'} href={message.path} className={classes.attachLink}>
+        <a target={'_blank'} href={message.path} className="attach-link">
           <Typography>
             {message.path.substring(message.path.lastIndexOf('-') + 1)}
           </Typography>
-          <AttachFileRounded className={classes.attachIcon} />
+          <AttachFileRounded className="attach-icon" />
         </a>
       </div>
     );
@@ -41,7 +37,6 @@ const MessageBody = ({ message, classes }) => {
 };
 
 const ChatRoom = (props) => {
-  const classes = useStyle();
   const scrollableGrid = useRef();
   const [messages, setMessages] = React.useState([]);
   const [newMessage, setNewMessage] = React.useState([]);
@@ -289,21 +284,21 @@ const ChatRoom = (props) => {
 
   return (
     <div>
-      <Paper className={classes.paper}>
-        <Grid container direction={'column'}>
-          <Grid item container>
+      <div className="paper">
+        <div className="paper-container">
+          <div className="users-name">
             {users.map((userItem) => (
               <div
                 className={classNames(
-                  classes.userItem,
-                  userItem.username === user && classes.userItemActive,
+                  "user-item",
+                  userItem.username === user && "user-item-active",
                 )}
                 onClick={() => joinChatWithUser(userItem.username)}
               >
                 {userItem.username}
               </div>
             ))}
-          </Grid>
+          </div>
           <div className="header-chatroom">
             <p className="header-chatroom-text">
               {`Chat With ${user} ${isTypingReceiver ? '(is typing...)' : ''}`}
@@ -327,28 +322,23 @@ const ChatRoom = (props) => {
                         message.sender.name !== props.location.state.name
                           ? "message-it"
                           : "message-me",
-                      )}
-                    >
+                      )}>
 
-                      <h4 className="message-sender-name">
-                        {message.sender.name}
-                      </h4>
-
-                      <MessageBody message={message} classes={classes} />
+                      <MessageBody message={message} />
 
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        {message.sender.name === props.location.state.name &&
-                          (message.seen ? (
-                            <SeenIcon style={{ marginLeft: '0.5rem' }} />
-                          ) : (
-                            <SentIcon style={{ marginLeft: '0.5rem' }} />
-                          ))}
 
                         <p className="message-date">
                           {message.date.split('T')[1].split('.')[0]}
                         </p>
 
-                        
+                        {message.sender.name === props.location.state.name &&
+                          (message.seen ? (
+                            <SeenIcon style={{ marginLeft: '0.5rem', color: '#aaa', fontSize: '20px' }} />
+                          ) : (
+                            <SentIcon style={{ marginLeft: '0.5rem', color: '#aaa', fontSize: '20px' }} />
+                        ))}
+
                       </div>
 
                     </div>
@@ -358,20 +348,18 @@ const ChatRoom = (props) => {
                   {message.sender.name === props.location.state.name && (
                           <>
                             <IconButton
-                              style={{ marginRight: '1rem' }}
                               onClick={() =>
                                 onEditClick(message.id, message.msg)
                               }
                             >
-                              <EditIcon className={classes.deleteBtn} />
+                              <EditIcon className="delete-btn" />
                             </IconButton>
 
                             <IconButton
-                              style={{ marginRight: '1rem' }}
                               onClick={() => onDeleteClick(message.id)}
                             >
 
-                              <DeleteIcon className={classes.deleteBtn} />
+                              <DeleteIcon className="delete-btn" />
 
                             </IconButton>
                           </>
@@ -382,51 +370,42 @@ const ChatRoom = (props) => {
               );
             })}
           </div>
-          <Grid
-            item
-            className={classes.footer}
-            container
-            justify={'center'}
-            alignItems={'center'}
-          >
-            <Grid item>
-              <IconButton
-                className={classes.btnSend}
-                onClick={startRecordVoice}
-              >
-                <MicIcon style={{ color: record ? 'green' : 'initial' }} />
-              </IconButton>
-            </Grid>
-            <Grid item xs>
-              <InputBase
-                value={newMessage}
-                onChange={handleChangeMessage}
-                className={classes.input}
-                onKeyDown={_handleKeyDown}
-              />
-            </Grid>
-            <Grid item>
-              <IconButton className={classes.btnSend} onClick={attachFile}>
+          <div className="sendbox">
+            <div className="sendbox-icons-box">
+              <button className="sendbox-icons" onClick={startRecordVoice}>
+                <MicIcon style={{ color: record ? 'green' : 'rgba(0, 0, 0, 0.54)' }} />
+              </button>
+            </div>
+            <div className="sendbox-icons-box">
+              <button className="sendbox-icons" onClick={attachFile}>
                 <AttachFileRounded />
-              </IconButton>
+              </button>
               <input
                 ref={inputFileRef}
                 type={'file'}
                 style={{ display: 'none' }}
                 onChange={onChangeFile}
               />
-            </Grid>
-            <Grid item>
-              <IconButton className={classes.btnSend} onClick={sendMessage}>
+            </div>
+            <div className="sendbox-input">
+              <input
+                value={newMessage}
+                onChange={handleChangeMessage}
+                className="mini-input-sendbox"
+                onKeyDown={_handleKeyDown}
+              />
+            </div>
+            <div className="sendbox-icons-box">
+              <button className="sendbox-icons" onClick={sendMessage}>
                 <SendIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Paper>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <ReactMic
         record={record}
-        className={classes.soundWave}
+        className="sound-wave"
         onStop={onStop}
         onData={onData}
         strokeColor="#000000"
