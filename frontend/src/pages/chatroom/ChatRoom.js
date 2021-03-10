@@ -76,7 +76,7 @@ const ChatRoom = (props) => {
         );
       })
       .catch((err) => {
-        alert('یک مشکلی هست تو لیست کاربرا');
+        alert('There is a problem with the user list');
       });
   }, []);
 
@@ -189,7 +189,7 @@ const ChatRoom = (props) => {
           });
         })
         .catch((err) => {
-          alert('فایل شما ارسال نشد متاسفانه');
+          alert('Your file was not sent');
         });
     }
   };
@@ -256,7 +256,7 @@ const ChatRoom = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        alert('ارسال نشد ویس شما');
+        alert('Your voice was not sent');
       });
   };
 
