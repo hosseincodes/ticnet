@@ -1,16 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SocketIOClient from 'socket.io-client';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import SendIcon from '@material-ui/icons/Send';
 import classNames from 'classnames';
-import { Done as SentIcon, DoneAll as SeenIcon } from '@material-ui/icons';
-import {
-  AttachFileRounded,
-  Delete as DeleteIcon,
-  Edit as EditIcon,
-  MicRounded as MicIcon,
-} from '@material-ui/icons';
 import axios from 'axios';
 import { ReactMic } from 'react-mic';
 import './style.css';
@@ -26,14 +16,14 @@ const MessageBody = ({ message }) => {
     return (
       <div>
         <a target={'_blank'} href={message.path} className="attach-link">
-          <Typography>
+          <p>
             {message.path.substring(message.path.lastIndexOf('-') + 1)}
-          </Typography>
-          <AttachFileRounded className="attach-icon" />
+          </p>
+          <i class="fas fa-paperclip attach-icon"></i>
         </a>
       </div>
     );
-  else return <Typography>{message.msg}</Typography>;
+  else return <p>{message.msg}</p>;
 };
 
 const ChatRoom = (props) => {
@@ -334,11 +324,11 @@ const ChatRoom = (props) => {
 
                         {message.sender.name === props.location.state.name &&
                           (message.seen ? (
-                            <SeenIcon style={{ marginLeft: '0.5rem', color: '#aaa', fontSize: '20px' }} />
+                            <span style={{ marginLeft: '0.5rem', color: '#aaa' }}><svg class="svg-inline--fa fa-check-double fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-double" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M505 174.8l-39.6-39.6c-9.4-9.4-24.6-9.4-33.9 0L192 374.7 80.6 263.2c-9.4-9.4-24.6-9.4-33.9 0L7 302.9c-9.4 9.4-9.4 24.6 0 34L175 505c9.4 9.4 24.6 9.4 33.9 0l296-296.2c9.4-9.5 9.4-24.7.1-34zm-324.3 106c6.2 6.3 16.4 6.3 22.6 0l208-208.2c6.2-6.3 6.2-16.4 0-22.6L366.1 4.7c-6.2-6.3-16.4-6.3-22.6 0L192 156.2l-55.4-55.5c-6.2-6.3-16.4-6.3-22.6 0L68.7 146c-6.2 6.3-6.2 16.4 0 22.6l112 112.2z"></path></svg></span>
                           ) : (
-                            <SentIcon style={{ marginLeft: '0.5rem', color: '#aaa', fontSize: '20px' }} />
+                            <span style={{ marginLeft: '0.5rem', color: '#aaa' }}><svg class="svg-inline--fa fa-check fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg></span>
                         ))}
-
+                          
                       </div>
 
                     </div>
@@ -347,21 +337,22 @@ const ChatRoom = (props) => {
 
                   {message.sender.name === props.location.state.name && (
                           <>
-                            <IconButton
+                            <button className="icon-btn-box"
                               onClick={() =>
                                 onEditClick(message.id, message.msg)
                               }
                             >
-                              <EditIcon className="delete-btn" />
-                            </IconButton>
+                              <i class="fas fa-edit icon-btn"></i>
 
-                            <IconButton
+                            </button>
+
+                            <button className="icon-btn-box"
                               onClick={() => onDeleteClick(message.id)}
                             >
 
-                              <DeleteIcon className="delete-btn" />
+                              <i class="fas fa-trash icon-btn"></i>
 
-                            </IconButton>
+                            </button>
                           </>
                         )}
 
@@ -373,12 +364,12 @@ const ChatRoom = (props) => {
           <div className="sendbox">
             <div className="sendbox-icons-box">
               <button className="sendbox-icons" onClick={startRecordVoice}>
-                <MicIcon style={{ color: record ? 'green' : 'rgba(0, 0, 0, 0.54)' }} />
+                <i class="fas fa-microphone" style={{ color: record ? 'green' : 'rgba(0, 0, 0, 0.54)' }}></i>
               </button>
             </div>
             <div className="sendbox-icons-box">
               <button className="sendbox-icons" onClick={attachFile}>
-                <AttachFileRounded />
+                <i class="fas fa-paperclip"></i>
               </button>
               <input
                 ref={inputFileRef}
@@ -397,7 +388,7 @@ const ChatRoom = (props) => {
             </div>
             <div className="sendbox-icons-box">
               <button className="sendbox-icons" onClick={sendMessage}>
-                <SendIcon />
+                <i class="fas fa-paper-plane"></i>
               </button>
             </div>
           </div>

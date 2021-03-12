@@ -89,12 +89,14 @@
 
 .sendbox-icons {
     color: rgba(0, 0, 0, 0.54);
-    margin: 1px;
+    margin: 0 10px;
     overflow: visible;
     text-align: center;
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     border-radius: 50%;
     border: 0;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .paper {
@@ -126,6 +128,7 @@
     border: 5px solid transparent;
     margin: 10px 10px 10px 0;
     color: #4A4A4A;
+    cursor: pointer;
 }
 
 .user-item-active {
@@ -157,7 +160,14 @@
     margin-right: 1rem;
 }
 
-.delete-btn {
-    width: 1rem;
-    height: 1rem;
+.icon-btn {
+    cursor: pointer;
+}
+
+.icon-btn-box {
+    border: 0;
+    background: transparent;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 17px;
+    padding: 10px;
 }
