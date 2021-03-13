@@ -277,7 +277,9 @@ const ChatRoom = (props) => {
       <div className="paper">
         <div className="paper-container">
           <div className="users-name">
+
             {users.map((userItem) => (
+
               <div
                 className={classNames(
                   "user-item",
@@ -285,16 +287,26 @@ const ChatRoom = (props) => {
                 )}
                 onClick={() => joinChatWithUser(userItem.username)}
               >
-                {userItem.username}
+                <span className="user-header-icon"><i class="fas fa-user"></i></span>{userItem.username}
+
               </div>
+
             ))}
+
           </div>
-          <div className="header-chatroom">
-            <p className="header-chatroom-text">
-              {`Chat With ${user} ${isTypingReceiver ? '(is typing...)' : ''}`}
-            </p>
+
+          <div className="header-chatroom"> 
+
+              <span className="logo"><span style={{fontWeight: "600", fontSize: "18px"}}>Ticnet</span><span style={{fontSize: "10px"}}> {`${user ? user : 'Lets chat :)'} ${isTypingReceiver ? ' is typing...' : ''}`} </span></span>
+              
+              <span className="settings"><i class="fas fa-cog"></i></span>
+              
           </div>
+          
           <div className="middle" ref={scrollableGrid}>
+
+            <span className="select-a-chat">{`${user ? '' : 'Select a chat to start messaging'}`}</span>
+
             {messages.map((message) => {
               return (
 
@@ -302,7 +314,7 @@ const ChatRoom = (props) => {
                   "message",
                   message.sender.name == props.location.state.name &&
                     "message-reverse",
-                )}>
+                )}> 
                   
                   <div className="message-box">
 

@@ -1,6 +1,5 @@
 .message {
-    margin-bottom: 5px;
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .message-box {
@@ -45,11 +44,8 @@
 }
 
 .header-chatroom {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: #eee;
-    padding: 10px;
+    padding: 20px;
     border-top-right-radius: 2px;
     border-top-left-radius: 2px;
 }
@@ -121,7 +117,7 @@
 }
 
 .user-item {
-    padding: 10px 15px;
+    padding: 5px;
     font-size: 20px;
     background-color: #eee;
     border-radius: 2px;
@@ -170,4 +166,23 @@
     color: rgba(0, 0, 0, 0.54);
     font-size: 17px;
     padding: 10px;
+}
+
+.settings {
+    float: right;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.user-header-icon {
+    font-size: 15px;
+    margin-right: 5px;
+    color: #aaa;
+}
+
+.select-a-chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }
