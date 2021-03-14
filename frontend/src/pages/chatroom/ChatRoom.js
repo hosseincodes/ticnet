@@ -155,9 +155,11 @@ const ChatRoom = (props) => {
     if (record) setRecord(false);
     else setRecord(true);
   };
+
   const attachFile = () => {
     inputFileRef.current.click();
   };
+
   const onChangeFile = (e) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -274,8 +276,11 @@ const ChatRoom = (props) => {
 
   return (
     <div>
+
       <div className="paper">
+
         <div className="paper-container">
+          
           <div className="users-name">
 
             {users.map((userItem) => (
@@ -372,14 +377,31 @@ const ChatRoom = (props) => {
 
               );
             })}
+
           </div>
+
           <div className="sendbox">
-            <div className="sendbox-icons-box">
-              <button className="sendbox-icons" onClick={startRecordVoice}>
-                <i class="fas fa-microphone" style={{ color: record ? 'green' : 'rgba(0, 0, 0, 0.54)' }}></i>
+
+            <div className="sendbox-icons-box" style={{ display: record ? 'none' : '' }}>
+              <button className="sendbox-icons" onClick={sendMessage}>
+                Submit
               </button>
             </div>
-            <div className="sendbox-icons-box">
+            
+            <div className="sendbox-input" style={{ display: record ? '' : 'none' }}>
+              <p style={{marginLeft: "15px"}}>Recording...</p>
+            </div>
+
+            <div className="sendbox-input" style={{ display: record ? 'none' : '' }}>
+              <input
+                value={newMessage}
+                onChange={handleChangeMessage}
+                className="mini-input-sendbox"
+                onKeyDown={_handleKeyDown}
+              />
+            </div>
+            
+            <div className="sendbox-icons-box" style={{ display: record ? 'none' : '' }}>
               <button className="sendbox-icons" onClick={attachFile}>
                 <i class="fas fa-paperclip"></i>
               </button>
@@ -390,22 +412,19 @@ const ChatRoom = (props) => {
                 onChange={onChangeFile}
               />
             </div>
-            <div className="sendbox-input">
-              <input
-                value={newMessage}
-                onChange={handleChangeMessage}
-                className="mini-input-sendbox"
-                onKeyDown={_handleKeyDown}
-              />
-            </div>
+
             <div className="sendbox-icons-box">
-              <button className="sendbox-icons" onClick={sendMessage}>
-                <i class="fas fa-paper-plane"></i>
+              <button className="sendbox-icons" onClick={startRecordVoice} style={{ color: record ? 'green' : 'rgba(0, 0, 0, 0.54)' }}>
+                <i class="fas fa-microphone"></i>
               </button>
             </div>
+
           </div>
+
         </div>
+
       </div>
+
       <ReactMic
         record={record}
         className="sound-wave"
@@ -414,6 +433,7 @@ const ChatRoom = (props) => {
         strokeColor="#000000"
         backgroundColor="#FF4081"
       />
+
     </div>
   );
 };
