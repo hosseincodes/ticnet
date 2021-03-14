@@ -33,6 +33,12 @@ const LoginPage = (props) => {
     });
   }
 
+  const _handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      submit();
+    }
+  };
+
   return (
       <div className="login-page-container">
 
@@ -51,6 +57,7 @@ const LoginPage = (props) => {
               placeholder="Enter your name"
               value={name}
               onChange={e => setName(e.target.value)}
+              onKeyDown={_handleKeyDown}
             />
 
           </div>
