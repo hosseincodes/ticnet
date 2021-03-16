@@ -292,7 +292,8 @@ const ChatRoom = (props) => {
                 )}
                 onClick={() => joinChatWithUser(userItem.username)}
               >
-                <span className="user-header-icon"><i class="fas fa-user"></i></span>{userItem.username}
+              
+              {userItem.username}
 
               </div>
 
