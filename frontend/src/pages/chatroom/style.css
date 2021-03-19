@@ -7,8 +7,8 @@ body {
 }
 
 .message-box {
-    width: min-content;
     margin: 0 15px;
+    line-height: 30px;
 }
 
 .message-box-content {
@@ -173,6 +173,12 @@ body {
 }
 
 .settings {
+    background: #fff;
+    overflow-y: auto;
+    height: 10rem;
+}
+
+.settings-icon {
     float: right;
     font-size: 18px;
     cursor: pointer;

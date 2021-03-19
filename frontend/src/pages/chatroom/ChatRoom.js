@@ -34,9 +34,12 @@ const ChatRoom = (props) => {
   const [user, setUser] = React.useState('');
   const [record, setRecord] = React.useState(false);
   const [messageForEdit, setMessageForEdit] = React.useState();
+  const [UsersForReName, setUsersForReName] = React.useState();
   const [attachment, setAttachment] = React.useState();
   const [isTyping, setIsTyping] = useState();
   const [isTypingReceiver, setIsTypingReceiver] = useState();
+  const [settings, setSettings] = useState();
+  const [reName, setReName] = useState();
 
   const inputFileRef = useRef();
   const userRef = useRef();
@@ -156,6 +159,11 @@ const ChatRoom = (props) => {
     else setRecord(true);
   };
 
+  const accountSettings = () => {
+    if (settings) setSettings(false);
+    else setSettings(true);
+  }
+
   const attachFile = () => {
     inputFileRef.current.click();
   };
@@ -265,13 +273,20 @@ const ChatRoom = (props) => {
       myUsername: props.location.state.name,
     });
   };
+
   const onDeleteClick = (id) => {
     socket.current.emit('deleteMsg', id);
   };
+  
   const onEditClick = (id, msg) => {
     // socket.current.emit("deleteMsg", id);
     setNewMessage(msg);
     setMessageForEdit(id);
+  };
+
+  const reNameClick = () => {
+    setUsers();
+    setUsersForReName();
   };
 
   return (
@@ -305,11 +320,24 @@ const ChatRoom = (props) => {
 
               <span className="logo"><span style={{fontWeight: "600", fontSize: "18px"}}>Ticnet</span><span style={{fontSize: "10px"}}> {`${user ? user : 'Lets chat :)'} ${isTypingReceiver ? ' is typing...' : ''}`} </span></span>
               
-              <span className="settings"><i class="fas fa-cog"></i></span>
+              <span onClick={accountSettings} className="settings-icon"><i class="fas fa-cog"></i></span>
               
           </div>
+
+          <div className="settings" style={{ display: settings ? '' : 'none' }}>
+            Rename
+            
+            <input
+              id="outlined-basic"
+              placeholder="Enter your name"
+              value={reName}
+              onChange={e => setReName(e.target.value)}
+            />
+
+            <button variant="contained" color="primary" onClick={reNameClick}>Rename</button>
+          </div>
           
-          <div className="middle" ref={scrollableGrid}>
+          <div className="middle" ref={scrollableGrid} style={{ display: settings ? 'none' : '' }}>
 
             <span className="select-a-chat">{`${user ? '' : 'Select a chat to start messaging'}`}</span>
 
