@@ -362,11 +362,11 @@ const ChatRoom = (props) => {
 
                       <MessageBody message={message} />
 
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
 
-                        <p className="message-date">
+                        <span className="message-date">
                           {message.date.split('T')[1].split('.')[0]}
-                        </p>
+                        </span>
 
                         {message.sender.name === props.location.state.name &&
                           (message.seen ? (
